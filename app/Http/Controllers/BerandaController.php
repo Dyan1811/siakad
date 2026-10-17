@@ -17,8 +17,7 @@ class BerandaController extends Controller
             'versiPhp'     => PHP_VERSION, 
             'versiMysql'   => $versiMysql, 
             'namaDatabase' => DB::getDatabaseName(), 
-            'waktu'        => now()->translatedFormat('l, d F Y H:i'), 
-            'tesSkrip'     => '<script>alert(1)</script>'
+            'waktu'        => now()->translatedFormat('l, d F Y H:i')
         ]); 
     }
 }    
