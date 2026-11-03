@@ -8,7 +8,7 @@
 
     <div class="row g-3 mb-4">
         @foreach ($statistik as $item)
-            <div class="col-12 col-sm-6 col-xl-3">
+            <div class="col-12 col-sm-6 col-md-4 col-xl">
                 <x-stat-card :judul="$item['judul']" :jumlah="$item['jumlah']"
                              :ikon="$item['ikon']" :warna="$item['warna']" />
             </div>

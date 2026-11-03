@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    <!-- Menerapkan tema dari localStorage secara instan sebelum halaman selesai dirender -->
+    <script>
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-bs-theme', savedTheme);
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'SIAKAD') | {{ config('app.name') }}</title>
@@ -20,6 +25,8 @@
             @include('layouts.partials.sidebar')
 
             <main class="col-lg-9 col-xl-10 px-3 px-md-4 py-4">
+                @include('layouts.partials.flash')
+                
                 @yield('content')
 
                 <footer class="text-center text-body-secondary small mt-5">

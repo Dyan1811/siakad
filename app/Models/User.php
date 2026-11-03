@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * NAME: Rian Firmansyah
+ * NIM: 3202416045
+ * DATE: 29/10/2026
+ */
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -22,6 +26,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**

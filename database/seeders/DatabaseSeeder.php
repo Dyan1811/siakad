@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * NAME: Rian Firmansyah
+ * NIM: 3202416045
+ * DATE: 29/10/2026
+ */
+
 namespace Database\Seeders;
 
 use App\Models\User;
@@ -15,11 +21,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this->call([
+            AdminSeeder::class,
+            UserSeeder::class, 
+            DosenSeeder::class,
+            MahasiswaSeeder::class,
+            MataKuliahSeeder::class,
+            KrsSeeder::class, 
         ]);
     }
 }
