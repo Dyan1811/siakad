@@ -3,7 +3,7 @@
 /**
  * NAME: Rian Firmansyah
  * NIM: 3202416045
- * DATE: 29/10/2026
+ * DATE: 3/11/2026
  */
 
 use Illuminate\Foundation\Application;
@@ -26,6 +26,8 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->alias([
             'role' => EnsureUserHasRole::class,
+            // Tambahkan dibawah ini
+            'prevent-back-history' => \App\Http\Middleware\PreventBackHistory::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

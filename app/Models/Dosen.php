@@ -1,9 +1,9 @@
 <?php
 
 /*
- * Nama : Rian Firmansyah
+ * NAME : Rian Firmansyah
  * NIM  : 3202416045
- * Deskripsi : Menambahkan jabatan_fungsional kedalam fillable setelah alamat.
+ * DATE : 4/11/2026
  */
 
 namespace App\Models;

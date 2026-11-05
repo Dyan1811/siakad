@@ -29,9 +29,20 @@ DATE: 2/11/2026
                         autocomplete="username" required autofocus />
                 </div>
 
+                 <!-- Kolom Kata Sandi dengan Tombol Lihat/Sembunyikan  -->
                 <div class="mb-3">
-                    <x-form-input label="Kata Sandi" name="password" type="password"
-                        autocomplete="current-password" required />
+                    <label for="password" class="form-label">Kata Sandi</label>
+                    <div class="input-group">
+                        <input type="password" id="password" name="password" 
+                            class="form-control @error('password') is-invalid @enderror" 
+                            autocomplete="current-password" required>
+                        <button class="btn btn-outline-secondary" type="button" id="togglePassword" aria-label="Tampilkan atau sembunyikan kata sandi">
+                            <i class="bi bi-eye" id="toggleIcon"></i>
+                        </button>
+                        @error('password')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
 
                 <div class="form-check mb-3">
@@ -45,3 +56,21 @@ DATE: 2/11/2026
         </div>
     </div>
 @endsection
+
+<!-- Skrip JavaScript sederhana untuk toggle tipe input -->
+@push('scripts')
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        const passwordInput = document.getElementById('password');
+        const toggleIcon = document.getElementById('toggleIcon');
+        
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            toggleIcon.classList.replace('bi-eye', 'bi-eye-slash');
+        } else {
+            passwordInput.type = 'password';
+            toggleIcon.classList.replace('bi-eye-slash', 'bi-eye');
+        }
+    });
+</script>
+@endpush

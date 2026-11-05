@@ -2,7 +2,7 @@
 /**
  * NAME: Rian Firmansyah
  * NIM: 3202416045
- * DATE: 29/10/2026
+ * DATE: 3/11/2026
  */
 namespace App\Models;
 
@@ -27,6 +27,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'last_login_at'
     ];
 
     /**
@@ -49,6 +50,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'last_login_at' => 'datetime',
         ];
     }
 }

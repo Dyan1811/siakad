@@ -1,3 +1,9 @@
+<!-- 
+NAME: Rian Firmansyah
+NIM: 3202416045
+DATE: 4/11/2026
+-->
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -10,10 +16,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'SIAKAD') | {{ config('app.name') }}</title>
 
-    <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}"
-          rel="stylesheet">
-    <link href="{{ asset('vendor/bootstrap-icons/bootstrap-icons.min.css') }}"
-          rel="stylesheet">
+    <link href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}"rel="stylesheet">
+    <link href="{{ asset('vendor/bootstrap-icons/bootstrap-icons.min.css') }}"rel="stylesheet">
+    <!--Tambahkan CSS sweetalert2 dibawah-->
+    <link href="{{ asset('vendor/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/siakad.css') }}" rel="stylesheet">
     @stack('styles')
 </head>
@@ -37,8 +43,9 @@
         </div>
     </div>
 
-    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}">
-    </script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- Tambahkan JS sweetalert2 dibawah -->
+     <script src="{{ asset('vendor/sweetalert2/sweetalert2.all.min.js') }}"></script>
     @stack('scripts')
 </body>
 </html>
