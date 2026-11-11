@@ -14,8 +14,5 @@
         <tr><th align="left">MySQL</th><td>{{ $versiMysql }}</td></tr> 
         <tr><th align="left">Database</th><td>{{ $namaDatabase }}</td></tr> 
     </table> 
-
-    <p>Menggunakan tanda seru:</p>
-    {!! $tesSkrip !!}
 </body> 
 </html> 
