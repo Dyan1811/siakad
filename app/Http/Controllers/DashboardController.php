@@ -1,53 +1,65 @@
 <?php
-
+/**
+ * NAME: Rian Firmansyah
+ * NIM: 3202416045
+ * DATE: 10/11/2026
+ */
 namespace App\Http\Controllers;
 
+use App\Models\Mahasiswa;
+use App\Models\Dosen;
+use App\Models\Matakuliah;
+use App\Models\Krs;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
     public function index(): View
     {
-        // Data sementara. Akan diganti query Eloquent pada jobsheet lanjutan.
-        $statistik = [
-            ['judul' => 'Mahasiswa', 'jumlah' => 1260,
-             'ikon' => 'bi-mortarboard-fill', 'warna' => 'primary'],
-            ['judul' => 'Dosen', 'jumlah' => 68,
-             'ikon' => 'bi-person-badge-fill', 'warna' => 'success'],
-            ['judul' => 'Mata Kuliah', 'jumlah' => 94,
-             'ikon' => 'bi-book-fill', 'warna' => 'warning'],
-            ['judul' => 'KRS Aktif', 'jumlah' => 842,
-             'ikon' => 'bi-journal-check', 'warna' => 'info'],
-            ['judul' => 'Rata-rata SKS per KRS', 'jumlah' => 21,
-             'ikon' => 'bi-journal-text','warna' => 'info'],
-        ];
+        // Hitung Total Data Ringkasan
+        $totalMahasiswa  = Mahasiswa::count();
+        $totalDosen      = class_exists(Dosen::class) ? Dosen::count() : 0;
+        $totalMatakuliah = Matakuliah::count();
+        $totalKrs        = Krs::count();
+        $totalKrsAktif   = Krs::where('status', 'disetujui')->count();
 
-        $kolomKrs = [
-            'nim' => 'NIM', 'nama' => 'Nama Mahasiswa',
-            'sks' => 'SKS', 'status' => 'Status',
-        ];
+        // 2. Rata-rata SKS per KRS
+        $totalSksAll   = DB::table('krs_detail')
+                            ->join('mata_kuliah', 'krs_detail.mata_kuliah_id', '=', 'mata_kuliah.id')
+                            ->sum('mata_kuliah.sks');
+                            
+        $avgSks = $totalKrs > 0 ? round($totalSksAll / $totalKrs) : 0;
 
-        $krsTerbaru = [
-            ['nim' => '2401001', 'nama' => 'Ahmad Fauzi',
-             'sks' => 22, 'status' => 'Disetujui'],
-            ['nim' => '2401002', 'nama' => 'Siti Rahmawati',
-             'sks' => 20, 'status' => 'Disetujui'],
-            ['nim' => '2301005', 'nama' => 'Budi Santoso',
-             'sks' => 24, 'status' => 'Menunggu'],
-            ['nim' => '2301012', 'nama' => 'Dewi Lestari',
-             'sks' => 18, 'status' => 'Menunggu'],
-            ['nim' => '2201020', 'nama' => 'Rizky Pratama',
-             'sks' => 21, 'status' => 'Disetujui'],
-        ];
+        // KRS Terbaru (5 Data Terakhir)
+        $krsTerbaru = Krs::with(['mahasiswa', 'matakuliah'])
+            ->latest()
+            ->take(5)
+            ->get();
 
-        $statusKrs = [
-            ['label' => 'Disetujui', 'persen' => 70, 'warna' => 'success'],
-            ['label' => 'Menunggu', 'persen' => 22, 'warna' => 'warning'],
-            ['label' => 'Ditolak', 'persen' => 8, 'warna' => 'danger'],
-        ];
+        // Perhitungan Persentase Status KRS
+        $draftCount = Krs::where('status', 'draft')->count();
+        $diajukanCount  = Krs::where('status', 'diajukan')->count();
+        $disetujuiCount = Krs::where('status', 'disetujui')->count();
+        $ditolakCount   = Krs::where('status', 'ditolak')->count();
+
+        $persenDraft = $totalKrs > 0 ? round(($draftCount / $totalKrs) * 100) : 0;
+        $persenDiajukan  = $totalKrs > 0 ? round(($diajukanCount / $totalKrs) * 100) : 0;
+        $persenDisetujui = $totalKrs > 0 ? round(($disetujuiCount / $totalKrs) * 100) : 0;
+        $persenDitolak   = $totalKrs > 0 ? round(($ditolakCount / $totalKrs) * 100) : 0;
 
         return view('dashboard', compact(
-            'statistik', 'kolomKrs', 'krsTerbaru', 'statusKrs'
+            'totalMahasiswa',
+            'totalDosen',
+            'totalMatakuliah',
+            'totalKrs',
+            'totalKrsAktif',
+            'avgSks',
+            'krsTerbaru',
+            'persenDraft',
+            'persenDiajukan',
+            'persenDisetujui',
+            'persenDitolak'
         ));
     }
 }

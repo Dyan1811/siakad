@@ -3,7 +3,7 @@
  /**
   * NAME: Rian Firmansyah
   * NIM: 3202416045
-  * DATE: 4/11/2026
+  * DATE: 10/11/2026
   */
     
     use App\Http\Controllers\Auth\LoginController;
@@ -29,23 +29,35 @@
         Route::get('/', fn () => redirect()->route('dashboard'));
         Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
         Route::get('/dashboard', [DashboardController::class, 'index']) -> name('dashboard');
-        Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
-        Route::get('/matakuliah', [MatakuliahController::class, 'index'])->name('matakuliah.index');
-        Route::get('/krs', [KrsController::class, 'index'])->name('krs.index');
+        Route::get('/dosen/data', [DosenController::class, 'data'])->name('dosen.data');
+        Route::get('/mahasiswa/data', [MahasiswaController::class, 'data']) -> name('mahasiswa.data');
+        Route::get('/matakuliah/data', [MatakuliahController::class, 'data']) -> name('matakuliah.data');
+        Route::get('/krs/data', [KrsController::class, 'data']) -> name('krs.data');
 
         // Dari Jobsheet 07: menampilkan versi PHP/Mysql dan nama database, jadi dilindungi
         Route::get('/beranda', [BerandaController::class, 'index'])->name('beranda');
         Route::get('/pengguna', [PenggunaController::class, 'index'])->middleware('role:admin')->name('pengguna.index');
 
-        Route::get('/mahasiswa/{nim}', [MahasiswaController::class, 'show'])->name('mahasiswa.show');
-
-        Route::get('/dosen/data', [DosenController::class, 'data'])->name('dosen.data');
-
     Route::middleware('role:admin')->group(function () {
         Route::resource('dosen', DosenController::class)
+            ->except(['index', 'show']);
+        Route::resource('mahasiswa', MahasiswaController::class)
+            ->except(['index', 'show']);
+        Route::resource('matakuliah', MatakuliahController::class)
+            ->except(['index', 'show']);
+        Route::resource('krs', KrsController::class)
+        // Menambahkan Parameters agar Laravel me-bind parameter route sebagai {krs} bukan {kr}.
+            ->parameters(['krs' => 'krs']) 
             ->except(['index', 'show']);
     });
 
     Route::resource('dosen', DosenController::class)
+        ->only(['index', 'show']);
+    Route::resource('mahasiswa', MahasiswaController::class)
+        ->only(['index', 'show']);
+    Route::resource('matakuliah', MatakuliahController::class)
+        ->only(['index', 'show']);
+    Route::resource('krs', KrsController::class)
+        ->parameters(['krs' => 'krs']) 
         ->only(['index', 'show']);
     });
