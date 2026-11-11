@@ -92,11 +92,11 @@ class MahasiswaController extends Controller
     private function validated(Request $request, ?Mahasiswa $mahasiswa = null): array
     {
         return $request->validate([
-            'nim' => ['required', 'string', 'max:15',
+            'nim' => ['required', 'string', 'max:15', 
                 Rule::unique(Mahasiswa::class, 'nim')->ignore($mahasiswa?->id)],
             'nama' => ['required', 'string', 'max:100'],
             'jenis_kelamin' => ['required', 'string', 'max:10'],
-            'email' => ['required', 'email', 'max:100',
+            'email' => ['required', 'email', 'max:100', 
                 Rule::unique(Mahasiswa::class, 'email')->ignore($mahasiswa?->id)],
             'angkatan' => ['required', 'string', 'max:20'],
             'program_studi' => ['required', 'string', 'max:100'],

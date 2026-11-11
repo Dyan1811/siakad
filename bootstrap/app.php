@@ -5,7 +5,6 @@
  * NIM: 3202416045
  * DATE: 11/11/2026
  */
-
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -35,8 +34,8 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         // semua error pada /api/* dijawab JSON, walaupun tanpa header accept
-        $exceptions->shouldRenderJsonWhen(function (Request $request, Throwble $e) {
-            return $request->is('api/*') || $request->exceptionJson();
+        $exceptions->shouldRenderJsonWhen(function (Request $request, Throwable $e) {
+            return $request->is('api/*') || $request->expectsJson();
         });
 
         $exceptions->render(function (NotFoundHttpException $e, Request $request) {
