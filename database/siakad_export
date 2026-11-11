@@ -1,0 +1,416 @@
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Server version:               8.4.3 - MySQL Community Server - GPL
+-- Server OS:                    Win64
+-- HeidiSQL Version:             12.8.0.6908
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+-- Dumping structure for table siakad.cache
+CREATE TABLE IF NOT EXISTS `cache` (
+  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `expiration` int NOT NULL,
+  PRIMARY KEY (`key`),
+  KEY `cache_expiration_index` (`expiration`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table siakad.cache: ~6 rows (approximately)
+INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
+	('siakad-3202416045-cache-admin@12345|127.0.0.1', 'i:1;', 1793875218),
+	('siakad-3202416045-cache-admin@12345|127.0.0.1:timer', 'i:1793875218;', 1793875218),
+	('siakad-3202416045-cache-admin@siakad|127.0.0.1', 'i:1;', 1793679175),
+	('siakad-3202416045-cache-admin@siakad|127.0.0.1:timer', 'i:1793679175;', 1793679175),
+	('siakad-3202416045-cache-dmin@siakad.test|127.0.0.1', 'i:1;', 1793631625),
+	('siakad-3202416045-cache-dmin@siakad.test|127.0.0.1:timer', 'i:1793631625;', 1793631625);
+
+-- Dumping structure for table siakad.cache_locks
+CREATE TABLE IF NOT EXISTS `cache_locks` (
+  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `owner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `expiration` int NOT NULL,
+  PRIMARY KEY (`key`),
+  KEY `cache_locks_expiration_index` (`expiration`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table siakad.cache_locks: ~0 rows (approximately)
+
+-- Dumping structure for table siakad.dosen
+CREATE TABLE IF NOT EXISTS `dosen` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `nidn` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `telepon` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `alamat` text COLLATE utf8mb4_unicode_ci,
+  `jabatan_fungsional` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `dosen_nidn_unique` (`nidn`),
+  UNIQUE KEY `dosen_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=1006 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table siakad.dosen: ~10 rows (approximately)
+INSERT INTO `dosen` (`id`, `nidn`, `nama`, `email`, `telepon`, `alamat`, `jabatan_fungsional`, `created_at`, `updated_at`) VALUES
+	(1, '0022763157', 'Puti Nurdiyanti, S.T., M.T.', 'ulya94@example.com', '082567934202', 'Psr. Pelajar Pejuang 45 No. 121, Ambon 52933, Aceh', NULL, '2026-10-24 10:28:49', '2026-11-04 10:15:55'),
+	(2, '0028032940', 'Ifa Iswahyudi, S.Kom., M.Kom.', 'sitorus.unjani@example.net', '082199309256', 'Gg. Cihampelas No. 521, Solok 13505, Sumbar', NULL, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(3, '0084473105', 'Farah Firmansyah, S.T., M.T.', 'nhakim@example.org', '084259402087', 'Ki. Ters. Buah Batu No. 780, Ambon 43937, Sumut', NULL, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(4, '0094046054', 'Daliman Suryono, S.T., M.T.', 'laras32@example.com', '086705956531', 'Kpg. Zamrud No. 80, Tebing Tinggi 17250, Bengkulu', NULL, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(5, '0034041140', 'Balangga Latupono, S.Kom., M.Kom.', 'jaswadi40@example.com', '085081649272', 'Jr. Bak Mandi No. 605, Surakarta 74548, Jambi', NULL, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(6, '0073913334', 'Tirtayasa Lazuardi, S.Kom., M.Kom.', 'cwaluyo@example.net', '080516085685', 'Jr. Elang No. 663, Salatiga 47227, Sulbar', NULL, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(7, '0095241991', 'Zamira Sihotang, S.Kom., M.Eng.', 'jabal26@example.net', '089298754257', 'Dk. Laswi No. 928, Bandung 98045, Jabar', NULL, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(8, '0098956115', 'Wage Wacana, S.Kom., M.Eng.', 'diah74@example.net', '081848159310', 'Gg. Jayawijaya No. 788, Cilegon 10494, Jabar', NULL, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(9, '0016739511', 'Lukman Astuti, S.T., M.T.', 'rini93@example.org', '083815153465', 'Ki. Baha No. 529, Dumai 67662, Sultra', NULL, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(10, '0084354087', 'Nova Winarsih, S.Kom., M.Kom.', 'luhung.astuti@example.org', '089946046655', 'Jr. W.R. Supratman No. 353, Solok 32640, Sulut', NULL, '2026-10-24 10:28:49', '2026-10-24 10:28:49');
+
+-- Dumping structure for table siakad.failed_jobs
+CREATE TABLE IF NOT EXISTS `failed_jobs` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table siakad.failed_jobs: ~0 rows (approximately)
+
+-- Dumping structure for table siakad.jobs
+CREATE TABLE IF NOT EXISTS `jobs` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `queue` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `attempts` tinyint unsigned NOT NULL,
+  `reserved_at` int unsigned DEFAULT NULL,
+  `available_at` int unsigned NOT NULL,
+  `created_at` int unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `jobs_queue_index` (`queue`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table siakad.jobs: ~0 rows (approximately)
+
+-- Dumping structure for table siakad.job_batches
+CREATE TABLE IF NOT EXISTS `job_batches` (
+  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `total_jobs` int NOT NULL,
+  `pending_jobs` int NOT NULL,
+  `failed_jobs` int NOT NULL,
+  `failed_job_ids` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `options` mediumtext COLLATE utf8mb4_unicode_ci,
+  `cancelled_at` int DEFAULT NULL,
+  `created_at` int NOT NULL,
+  `finished_at` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table siakad.job_batches: ~0 rows (approximately)
+
+-- Dumping structure for table siakad.krs
+CREATE TABLE IF NOT EXISTS `krs` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `mahasiswa_id` bigint unsigned NOT NULL,
+  `tahun_akademik` varchar(9) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `semester` enum('Ganjil','Genap') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` enum('draft','diajukan','disetujui','ditolak') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'draft',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `krs_mahasiswa_id_tahun_akademik_semester_unique` (`mahasiswa_id`,`tahun_akademik`,`semester`),
+  CONSTRAINT `krs_mahasiswa_id_foreign` FOREIGN KEY (`mahasiswa_id`) REFERENCES `mahasiswa` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table siakad.krs: ~11 rows (approximately)
+INSERT INTO `krs` (`id`, `mahasiswa_id`, `tahun_akademik`, `semester`, `status`, `created_at`, `updated_at`) VALUES
+	(1, 1, '2026/2027', 'Ganjil', 'draft', '2026-10-24 10:28:49', '2026-11-09 04:42:26'),
+	(2, 2, '2026/2027', 'Ganjil', 'draft', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(3, 3, '2026/2027', 'Ganjil', 'draft', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(4, 4, '2026/2027', 'Ganjil', 'draft', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(5, 5, '2026/2027', 'Ganjil', 'ditolak', '2026-10-24 10:28:49', '2026-11-10 11:19:06'),
+	(6, 6, '2026/2027', 'Ganjil', 'draft', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(7, 7, '2026/2027', 'Ganjil', 'draft', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(8, 8, '2026/2027', 'Ganjil', 'diajukan', '2026-10-24 10:28:49', '2026-11-10 11:18:48'),
+	(9, 9, '2026/2027', 'Ganjil', 'draft', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(10, 10, '2026/2027', 'Ganjil', 'draft', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(22, 52, '2026/2027', 'Ganjil', 'disetujui', '2026-11-10 08:44:36', '2026-11-10 11:18:31');
+
+-- Dumping structure for table siakad.krs_detail
+CREATE TABLE IF NOT EXISTS `krs_detail` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `krs_id` bigint unsigned NOT NULL,
+  `mata_kuliah_id` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `krs_detail_krs_id_mata_kuliah_id_unique` (`krs_id`,`mata_kuliah_id`),
+  KEY `krs_detail_mata_kuliah_id_foreign` (`mata_kuliah_id`),
+  CONSTRAINT `krs_detail_krs_id_foreign` FOREIGN KEY (`krs_id`) REFERENCES `krs` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `krs_detail_mata_kuliah_id_foreign` FOREIGN KEY (`mata_kuliah_id`) REFERENCES `mata_kuliah` (`id`) ON DELETE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table siakad.krs_detail: ~56 rows (approximately)
+INSERT INTO `krs_detail` (`id`, `krs_id`, `mata_kuliah_id`, `created_at`, `updated_at`) VALUES
+	(6, 2, 2, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(7, 2, 10, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(8, 2, 9, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(9, 2, 4, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(10, 2, 3, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(11, 3, 2, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(12, 3, 7, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(13, 3, 3, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(14, 3, 6, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(15, 3, 9, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(16, 4, 10, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(17, 4, 8, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(18, 4, 9, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(19, 4, 5, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(20, 4, 7, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(21, 5, 6, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(22, 5, 10, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(23, 5, 1, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(24, 5, 3, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(25, 5, 9, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(26, 6, 6, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(27, 6, 8, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(28, 6, 5, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(29, 6, 10, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(30, 6, 3, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(31, 7, 8, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(32, 7, 10, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(33, 7, 6, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(34, 7, 3, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(35, 7, 7, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(36, 8, 9, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(37, 8, 1, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(38, 8, 4, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(39, 8, 8, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(40, 8, 6, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(41, 9, 9, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(42, 9, 4, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(43, 9, 5, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(44, 9, 8, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(45, 9, 6, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(46, 10, 2, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(47, 10, 6, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(48, 10, 9, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(49, 10, 1, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(50, 10, 8, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(62, 1, 1, '2026-11-09 04:44:09', '2026-11-09 04:44:09'),
+	(63, 1, 2, '2026-11-09 04:44:09', '2026-11-09 04:44:09'),
+	(64, 1, 3, '2026-11-09 04:44:09', '2026-11-09 04:44:09'),
+	(65, 1, 4, '2026-11-09 04:44:09', '2026-11-09 04:44:09'),
+	(66, 1, 5, '2026-11-09 04:44:09', '2026-11-09 04:44:09'),
+	(78, 22, 1, '2026-11-10 08:44:36', '2026-11-10 08:44:36'),
+	(79, 22, 2, '2026-11-10 08:44:36', '2026-11-10 08:44:36'),
+	(80, 22, 3, '2026-11-10 08:44:36', '2026-11-10 08:44:36'),
+	(81, 22, 4, '2026-11-10 08:44:36', '2026-11-10 08:44:36'),
+	(82, 22, 5, '2026-11-10 08:44:36', '2026-11-10 08:44:36'),
+	(83, 22, 6, '2026-11-10 08:44:36', '2026-11-10 08:44:36');
+
+-- Dumping structure for table siakad.mahasiswa
+CREATE TABLE IF NOT EXISTS `mahasiswa` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `nim` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jenis_kelamin` enum('L','P') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `angkatan` smallint unsigned NOT NULL,
+  `program_studi` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'D3 Teknik Informatika',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mahasiswa_nim_unique` (`nim`),
+  UNIQUE KEY `mahasiswa_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table siakad.mahasiswa: ~51 rows (approximately)
+INSERT INTO `mahasiswa` (`id`, `nim`, `nama`, `jenis_kelamin`, `email`, `angkatan`, `program_studi`, `created_at`, `updated_at`) VALUES
+	(1, '2503038484', 'Mahdi Yulianti', 'P', '2503038484@mhs.example.com', 2025, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(2, '2303031070', 'Yuni Oktaviani', 'P', '2303031070@mhs.example.com', 2023, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(3, '2503036934', 'Mursita Salahudin', 'L', '2503036934@mhs.example.com', 2025, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(4, '2403031071', 'Kariman Sudiati', 'L', '2403031071@mhs.example.com', 2024, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(5, '2303037108', 'Mulyono Pradana', 'L', '2303037108@mhs.example.com', 2023, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(6, '2303034263', 'Mitra Purwanti', 'P', '2303034263@mhs.example.com', 2023, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(7, '2303037272', 'Wasis Puspasari', 'L', '2303037272@mhs.example.com', 2023, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(8, '2403032232', 'Cakrawala Lestari', 'P', '2403032232@mhs.example.com', 2024, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(9, '2303039310', 'Kurnia Riyanti', 'L', '2303039310@mhs.example.com', 2023, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(10, '2503037659', 'Ifa Suartini', 'P', '2503037659@mhs.example.com', 2025, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(11, '2203036773', 'Yahya Halim', 'L', '2203036773@mhs.example.com', 2022, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(12, '2303038550', 'Mitra Aryani', 'L', '2303038550@mhs.example.com', 2023, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(13, '2503031790', 'Asmianto Mulyani', 'L', '2503031790@mhs.example.com', 2025, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(14, '2303033196', 'Wadi Aryani', 'P', '2303033196@mhs.example.com', 2023, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(15, '2403036867', 'Dina Sihombing', 'P', '2403036867@mhs.example.com', 2024, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(16, '2403037037', 'Adhiarja Sihombing', 'P', '2403037037@mhs.example.com', 2024, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(17, '2303036346', 'Hari Mardhiyah', 'P', '2303036346@mhs.example.com', 2023, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(18, '2403034617', 'Cager Mansur', 'L', '2403034617@mhs.example.com', 2024, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(19, '2303032167', 'Zamira Susanti', 'P', '2303032167@mhs.example.com', 2023, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(20, '2503035579', 'Najwa Puspita', 'P', '2503035579@mhs.example.com', 2025, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(21, '2303032508', 'Eluh Mahendra', 'P', '2303032508@mhs.example.com', 2023, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(22, '2503031337', 'Ibrahim Yuliarti', 'L', '2503031337@mhs.example.com', 2025, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(23, '2203032008', 'Wage Nainggolan', 'L', '2203032008@mhs.example.com', 2022, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(24, '2403035213', 'Lukita Marpaung', 'P', '2403035213@mhs.example.com', 2024, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(25, '2303035425', 'Unjani Maulana', 'P', '2303035425@mhs.example.com', 2023, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(26, '2303030427', 'Ira Nasyidah', 'P', '2303030427@mhs.example.com', 2023, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(27, '2503033802', 'Anita Siregar', 'P', '2503033802@mhs.example.com', 2025, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(28, '2303033399', 'Kusuma Sudiati', 'P', '2303033399@mhs.example.com', 2023, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(29, '2203032758', 'Rini Sitompul', 'P', '2203032758@mhs.example.com', 2022, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(30, '2503035417', 'Kenari Yulianti', 'L', '2503035417@mhs.example.com', 2025, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(31, '2303037230', 'Asmianto Astuti', 'P', '2303037230@mhs.example.com', 2023, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(32, '2403033356', 'Zahra Jailani', 'P', '2403033356@mhs.example.com', 2024, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(33, '2203035833', 'Lintang Usada', 'P', '2203035833@mhs.example.com', 2022, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(34, '2203035606', 'Balangga Aryani', 'L', '2203035606@mhs.example.com', 2022, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(35, '2203038511', 'Himawan Sinaga', 'L', '2203038511@mhs.example.com', 2022, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(36, '2303036679', 'Kayun Prayoga', 'P', '2303036679@mhs.example.com', 2023, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(37, '2303036584', 'Cecep Setiawan', 'L', '2303036584@mhs.example.com', 2023, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(38, '2503031073', 'Tira Maryati', 'P', '2503031073@mhs.example.com', 2025, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(39, '2203033239', 'Nyana Prasetya', 'P', '2203033239@mhs.example.com', 2022, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(40, '2403031096', 'Oman Zulkarnain', 'L', '2403031096@mhs.example.com', 2024, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(41, '2303037361', 'Wardi Adriansyah', 'L', '2303037361@mhs.example.com', 2023, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(42, '2403035334', 'Ridwan Maheswara', 'P', '2403035334@mhs.example.com', 2024, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(43, '2303032998', 'Garang Haryanti', 'L', '2303032998@mhs.example.com', 2023, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(44, '2403030764', 'Rini Pranowo', 'P', '2403030764@mhs.example.com', 2024, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(45, '2203033312', 'Elvina Permadi', 'P', '2203033312@mhs.example.com', 2022, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(46, '2403030541', 'Mujur Wulandari', 'P', '2403030541@mhs.example.com', 2024, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(47, '2203036521', 'Puti Nugroho', 'P', '2203036521@mhs.example.com', 2022, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(48, '2303039705', 'Jaka Agustina', 'L', '2303039705@mhs.example.com', 2023, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(49, '2303035137', 'Karta Laksita', 'L', '2303035137@mhs.example.com', 2023, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(50, '2203035252', 'Makara Wahyudin', 'P', '2203035252@mhs.example.com', 2022, 'D3 Teknik Informatika', '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(52, '3202416045', 'Rian Firmansyah', 'L', 'fryan@mhs.test', 2024, 'D3 Teknik Informatika', '2026-11-05 16:44:21', '2026-11-05 16:44:53');
+
+-- Dumping structure for table siakad.mata_kuliah
+CREATE TABLE IF NOT EXISTS `mata_kuliah` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `kode_mk` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_mk` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sks` tinyint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mata_kuliah_kode_mk_unique` (`kode_mk`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table siakad.mata_kuliah: ~11 rows (approximately)
+INSERT INTO `mata_kuliah` (`id`, `kode_mk`, `nama_mk`, `sks`, `created_at`, `updated_at`) VALUES
+	(1, 'TI101', 'Pengantar Teknologi Informasi', 2, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(2, 'TI102', 'Algoritma dan Pemrograman', 3, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(3, 'TI103', 'Matematika Diskrit', 3, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(4, 'TI201', 'Basis Data', 3, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(5, 'TI202', 'Desain Web', 3, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(6, 'TI203', 'Pemrograman Web', 3, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(7, 'TI204', 'Jaringan Komputer', 3, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(8, 'TI301', 'Rekayasa Perangkat Lunak', 3, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(9, 'TI302', 'Pemrograman Berorientasi Objek', 3, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(10, 'TI303', 'Sistem Operasi', 2, '2026-10-24 10:28:49', '2026-10-24 10:28:49'),
+	(11, 'TI401', 'Kewirausahaan', 1, '2026-11-07 12:42:25', '2026-11-07 12:43:04');
+
+-- Dumping structure for table siakad.migrations
+CREATE TABLE IF NOT EXISTS `migrations` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table siakad.migrations: ~12 rows (approximately)
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+	(1, '0001_01_01_000000_create_users_table', 1),
+	(2, '0001_01_01_000001_create_cache_table', 1),
+	(3, '0001_01_01_000002_create_jobs_table', 1),
+	(4, '2026_10_21_104417_add_role_to_users_table', 1),
+	(5, '2026_10_21_104933_create_dosen_table', 1),
+	(6, '2026_10_21_105000_create_mahasiswa_table', 1),
+	(7, '2026_10_21_105020_create_mata_kuliah_table', 1),
+	(8, '2026_10_21_111001_create_krs_table', 1),
+	(9, '2026_10_21_111012_create_krs_detail_table', 1),
+	(10, '2026_10_24_165720_add_jabatan_fungsional_to_dosen_table', 1),
+	(11, '2026_11_03_154548_add_last_login_at_to_users_table', 2),
+	(12, '2026_11_11_085331_create_personal_access_tokens_table', 3);
+
+-- Dumping structure for table siakad.password_reset_tokens
+CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table siakad.password_reset_tokens: ~0 rows (approximately)
+
+-- Dumping structure for table siakad.personal_access_tokens
+CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint unsigned NOT NULL,
+  `name` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`),
+  KEY `personal_access_tokens_expires_at_index` (`expires_at`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table siakad.personal_access_tokens: ~0 rows (approximately)
+
+-- Dumping structure for table siakad.sessions
+CREATE TABLE IF NOT EXISTS `sessions` (
+  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint unsigned DEFAULT NULL,
+  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text COLLATE utf8mb4_unicode_ci,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_activity` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `sessions_user_id_index` (`user_id`),
+  KEY `sessions_last_activity_index` (`last_activity`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table siakad.sessions: ~2 rows (approximately)
+INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+	('hZg7elcBILCia7vI9BLd084GltK78FTJF4pBEsKg', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiaUo4cjY4SjgyampCeEVVdlR1dnpzU21SZW5kNDByOFlNY0dQamJBNyI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjI6e3M6MzoidXJsIjtzOjI3OiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvZG9zZW4iO3M6NToicm91dGUiO3M6MTE6ImRvc2VuLmluZGV4Ijt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjE3OiJwYXNzd29yZF9oYXNoX3dlYiI7czo2NDoiMDMyYjExMzBiYTVlNTcwNmUwOTAwYmZmNGYwZmJkOTI4YjI4ZWY2YzA2MTI3ZmUzNGFlNmQ1ZDRkNTliYzhlNyI7fQ==', 1794368553),
+	('yqjIFLfPufYDOvm04b5pjbA0CVLcpGFq8F4dcdSU', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:159.0) Gecko/20100101 Firefox/159.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiNVliWmxzRks5ajg1OGJXakZUY3VYYmpqbll4bVlVRElsdmxORWg1dCI7czo5OiJfcHJldmlvdXMiO2E6Mjp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9tYWhhc2lzd2EiO3M6NToicm91dGUiO3M6MTU6Im1haGFzaXN3YS5pbmRleCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czoxNzoicGFzc3dvcmRfaGFzaF93ZWIiO3M6NjQ6IjAzMmIxMTMwYmE1ZTU3MDZlMDkwMGJmZjRmMGZiZDkyOGIyOGVmNmMwNjEyN2ZlMzRhZTZkNWQ0ZDU5YmM4ZTciO30=', 1794378085);
+
+-- Dumping structure for table siakad.users
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `role` enum('admin','dosen','mahasiswa') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'mahasiswa',
+  `last_login_at` timestamp NULL DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Dumping data for table siakad.users: ~3 rows (approximately)
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `last_login_at`, `remember_token`, `created_at`, `updated_at`) VALUES
+	(1, 'Administrator SIAKAD', 'admin@siakad.test', NULL, '$2y$12$o/8h8WcA/.WGLfIBiYLgq.rze8jKztrmJFFL8W11HgcIJgUOZYOLi', 'admin', '2026-11-11 06:20:17', NULL, '2026-10-24 10:28:48', '2026-11-11 06:20:17'),
+	(2, 'Dosen Uji', 'dosen@siakad.test', NULL, '$2y$12$f/vmeg3WbwEOQq1sQP7cteDZShlm1.MPmGbPJYogyHDINf458eYqG', 'dosen', '2026-11-06 02:04:53', NULL, '2026-10-24 10:28:49', '2026-11-06 02:04:53'),
+	(3, 'Mahasiswa Uji', 'mahasiswa@siakad.test', NULL, '$2y$12$cRreQoHnXUK52wR1gkgw5u0fHd5qyRdZzrikZ3.D1w.Bq6ugxyf1q', 'mahasiswa', '2026-11-06 02:09:50', NULL, '2026-10-24 10:28:49', '2026-11-06 02:09:50');
+
+/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
